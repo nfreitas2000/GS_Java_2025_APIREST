@@ -16,7 +16,6 @@ public class RepositoryCadastroEmpresa {
     DataSource dataSource;
 
     public void inserirEmpresa(DTOEmpresa empresa) throws SQLException {
-        // 1) Inserir empresa
         String sqlInsert = "INSERT INTO T_LU_EMPRESA (nome_empresa, cnpj, setor, data_criacao) VALUES (?, ?, ?, TO_DATE(?, 'YYYY-MM-DD'))";
         int idEmpresa = 0;
         try (Connection con = dataSource.getConnection()) {

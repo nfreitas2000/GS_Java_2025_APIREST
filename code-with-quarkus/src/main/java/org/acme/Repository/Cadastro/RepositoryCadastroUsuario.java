@@ -18,16 +18,32 @@ public class RepositoryCadastroUsuario {
     DataSource dataSource;
 
     public void cadastarUsuario(DTOUsuario usuario) throws SQLException {
+        int id = 0;
         String sql = "insert into T_LU_USUARIO (nome_usuario, email, senha, id_empresa) values (?, ?, ?, ?)";
-        try (
-                Connection con = dataSource.getConnection();
-                PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setString(1, usuario.getNome_usuario());
-            ps.setString(2, usuario.getEmail());
-            ps.setString(3, usuario.getSenha());
-            ps.setInt(4, idNomeEmpresa(usuario.getNm_empresa()));
-
-            ps.executeUpdate();
+        try (Connection con = dataSource.getConnection()){
+            try (PreparedStatement ps = con.prepareStatement(sql))
+            {
+                 {
+                    ps.setString(1, usuario.getNome_usuario());
+                    ps.setString(2, usuario.getEmail());
+                    ps.setString(3, usuario.getSenha());
+                    ps.setInt(4, idNomeEmpresa(usuario.getNm_empresa()));
+                    ps.executeUpdate();
+                }
+            }
+            sql = "SELECT id_usuario FROM T_LU_USUARIO WHERE email = ?";
+            try (PreparedStatement ps = con.prepareStatement(sql)) {
+                ps.setString(1, usuario.getEmail());
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    id = rs.getInt(1);
+                }
+            }
+            sql = "INSERT INTO T_LU_STATUS_USUARIO (id_usuario) VALUES (?)";
+            try (PreparedStatement ps = con.prepareStatement(sql)) {
+                ps.setInt(1, id);
+                ps.executeUpdate();
+            }
         }
     }
 
