@@ -1,4 +1,4 @@
-package org.acme.Model.DTO;
+package org.acme.Model.DTO.Empresa;
 
 public class DTOEmpresaNome {
     private String nome_empresa;

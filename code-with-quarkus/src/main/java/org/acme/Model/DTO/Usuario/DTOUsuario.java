@@ -1,6 +1,4 @@
-package org.acme.Model.DTO;
-
-import org.acme.Model.ModelEmpresa;
+package org.acme.Model.DTO.Usuario;
 
 public class DTOUsuario {
     private String nome_usuario;

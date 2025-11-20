@@ -7,14 +7,12 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.acme.Model.DTO.DTOEmpresa;
-import org.acme.Model.DTO.DTOUsuario;
+import org.acme.Model.DTO.Empresa.DTOEmpresa;
+import org.acme.Model.DTO.Usuario.DTOUsuario;
 import org.acme.Service.Cadastro.ServiceCadastroEmpresa;
 import org.acme.Service.Cadastro.ServiceCadastroUsuario;
 
-import java.sql.Array;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Path("/cadastro")

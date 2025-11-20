@@ -2,8 +2,7 @@ package org.acme.Repository.Cadastro;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import org.acme.Model.DTO.DTOUsuario;
-import org.acme.Model.ModelEmpresa;
+import org.acme.Model.DTO.Usuario.DTOUsuario;
 
 import javax.sql.DataSource;
 import java.sql.Connection;

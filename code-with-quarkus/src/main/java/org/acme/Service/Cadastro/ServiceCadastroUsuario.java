@@ -2,7 +2,7 @@ package org.acme.Service.Cadastro;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import org.acme.Model.DTO.DTOUsuario;
+import org.acme.Model.DTO.Usuario.DTOUsuario;
 import org.acme.Repository.Cadastro.RepositoryCadastroUsuario;
 
 import java.sql.SQLException;
