@@ -33,7 +33,7 @@ public class ResourceDesafioUsuario {
     }
     @Path("/aceitar/{idUser}/{idDesafio}")
     @POST
-    public Response desafiosUsuarioEmpresa(@PathParam("idUser") int id_usuario, @PathParam("idDesafio") int id_desafio){
+    public Response desafioAceitar(@PathParam("idUser") int id_usuario, @PathParam("idDesafio") int id_desafio){
         try{
             serviceDesafioUsuario.aceitarDesafio(id_usuario, id_desafio);
             return Response.status(Response.Status.CREATED)
@@ -53,7 +53,7 @@ public class ResourceDesafioUsuario {
     public Response finalizarDesafio(@PathParam("idUser") int id_usuario, @PathParam("idDesafio") int id_desafio){
         try{
             serviceDesafioUsuario.finalizarDesafio(id_usuario, id_desafio);
-            return Response.status(Response.Status.CREATED)
+            return Response.status(Response.Status.OK)
                     .entity("Desafio finalizado com sucesso!").build();
 
         } catch (SQLException e) {

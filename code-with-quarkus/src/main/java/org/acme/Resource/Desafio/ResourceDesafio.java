@@ -55,7 +55,7 @@ public class ResourceDesafio {
     @Path("/atualizar")
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
-    public Response readDesafiosEmpresa(DTOAtualizarDesafio desafio){
+    public Response atualizarDesafiosEmpresa(DTOAtualizarDesafio desafio){
         try{
             serviceDesafios.updateDesafio(desafio);
             return Response.status(Response.Status.OK)
