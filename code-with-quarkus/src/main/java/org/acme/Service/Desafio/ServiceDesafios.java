@@ -2,6 +2,7 @@ package org.acme.Service.Desafio;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import org.acme.Model.DTO.Desafio.DTOAtualizarDesafio;
 import org.acme.Model.DTO.Desafio.DTODesafio;
 import org.acme.Model.DTO.Empresa.DTOEmpresa;
 import org.acme.Model.ModelDesafio;
@@ -44,5 +45,44 @@ public class ServiceDesafios {
     }
     public List<ModelDesafio> desafiosEmpresa(int id_empresa) throws SQLException {
         return repositoryDesafios.readDesafiosCadastradosEmpresa(id_empresa);
+    }
+
+    public boolean validarCampos(DTOAtualizarDesafio desafio) {
+        if (desafio.getId_desafio() <= 0) {
+            throw new IllegalArgumentException("id_desafio inválido.");
+        }
+        if (desafio.getCategoria() == null || desafio.getCategoria().isEmpty()) {
+            throw new IllegalArgumentException("categoria não pode ser vazia.");
+        }
+        if (desafio.getTitulo() == null || desafio.getTitulo().isEmpty()) {
+            throw new IllegalArgumentException("titulo não pode ser vazio.");
+        }
+        if (desafio.getDescricao() == null || desafio.getDescricao().isEmpty()) {
+            throw new IllegalArgumentException("descricao não pode ser vazia.");
+        }
+        if (desafio.getXp_recompensa() < 0) {
+            throw new IllegalArgumentException("xp_recompensa não pode ser negativo.");
+        }
+        if (desafio.getDificuldade() == null || desafio.getDificuldade().isEmpty()) {
+            throw new IllegalArgumentException("dificuldade não pode ser vazia.");
+        }
+        if (desafio.getAtivo() == null || desafio.getAtivo().isEmpty()) {
+            throw new IllegalArgumentException("ativo não pode ser vazio.");
+        }
+        return true;
+    }
+
+
+    public void updateDesafio(DTOAtualizarDesafio desafio) throws SQLException {
+        if (validarCampos(desafio)) {
+            repositoryDesafios.atualizarDesafios(desafio);
+        }
+    }
+
+    public void deletarDesafio(int id) throws SQLException {
+        if (id <= 0) {
+            throw new IllegalArgumentException("ID do desafio inválido.");
+        }
+        repositoryDesafios.deletarDesafio(id);
     }
 }

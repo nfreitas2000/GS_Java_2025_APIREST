@@ -2,6 +2,8 @@ package org.acme.Repository.Desafios;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.NotFoundException;
+import org.acme.Model.DTO.Desafio.DTOAtualizarDesafio;
 import org.acme.Model.DTO.Desafio.DTODesafio;
 import org.acme.Model.ModelDesafio;
 
@@ -48,6 +50,44 @@ public class RepositoryDesafios {
             }
             return desafios;
         }
+    }
 
+    public void atualizarDesafios(DTOAtualizarDesafio desafio) throws SQLException {
+        String sql = "UPDATE T_LU_DESAFIO SET categoria = ?, titulo = ?, descricao = ?, xp_recompensa = ?, dificuldade = ?, ativo = ? WHERE id_desafio = ?";
+        try(Connection con = dataSource.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql))
+        {
+            ps.setString(1, desafio.getCategoria());
+            ps.setString(2, desafio.getTitulo());
+            ps.setString(3, desafio.getDescricao());
+            ps.setInt(4, desafio.getXp_recompensa());
+            ps.setString(5, desafio.getDificuldade());
+            ps.setString(6, desafio.getAtivo());
+            ps.setInt(7, desafio.getId_desafio());
+
+            int linhas = ps.executeUpdate();
+            if (linhas == 0) {
+                throw new NotFoundException("Desafio não encontrado");
+            }
+        }
+    }
+
+    public void deletarDesafio(int id) throws SQLException{
+        String sql = "Delete from T_LU_DESAFIO where id_desafio = ?";
+
+        try (Connection con = dataSource.getConnection()) {
+            con.setAutoCommit(false);
+
+            try (PreparedStatement st = con.prepareStatement(sql)) {
+                st.setInt(1, id);
+                int funcionou = st.executeUpdate();
+                if (funcionou > 0) {
+                    con.commit();
+                } else {
+                    con.rollback();
+                    throw new NotFoundException ("ID não encontrado");
+                }
+            }
+        }
     }
 }
