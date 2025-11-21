@@ -26,7 +26,7 @@ public class ResourceLogin {
     public Response realizarLoginUsuario(DTOUsuarioLogin dadosUsuario){
         try{
             int id = serviceLoginUsuario.realizarLogin(dadosUsuario);
-            return Response.status(Response.Status.FOUND)
+            return Response.status(Response.Status.OK)
                     .entity(id).build();
 
         } catch (SQLException e) {
@@ -43,7 +43,7 @@ public class ResourceLogin {
     public Response realizarLoginEmpresa(DTOEmpresaLogin dadosEmpresa){
         try{
             int id = serviceLoginEmpresa.realizarLogin(dadosEmpresa);
-            return Response.status(Response.Status.FOUND)
+            return Response.status(Response.Status.OK)
                     .entity(id).build();
 
         } catch (SQLException e) {

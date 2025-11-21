@@ -20,7 +20,7 @@ public class ResourceDesafioUsuario {
     public Response desafiosUsuarioEmpresa(@PathParam("id") int id){
         try{
             List<ModelDesafio> lista = serviceDesafioUsuario.desafiosUsuarioEmpresa(id);
-            return Response.status(Response.Status.FOUND)
+            return Response.status(Response.Status.OK)
                     .entity(lista).build();
 
         } catch (SQLException e) {
@@ -70,7 +70,7 @@ public class ResourceDesafioUsuario {
     public Response desafiosAceitos(@PathParam("id") int id){
         try{
             List<ModelDesafioAceito> lista = serviceDesafioUsuario.listarDesafiosAceitos(id);
-            return Response.status(Response.Status.FOUND)
+            return Response.status(Response.Status.OK)
                     .entity(lista).build();
 
         } catch (SQLException e) {

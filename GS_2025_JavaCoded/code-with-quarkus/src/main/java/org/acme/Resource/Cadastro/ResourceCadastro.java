@@ -45,7 +45,7 @@ public class ResourceCadastro {
     public Response listarEmpresas(){
         try{
             List<String> lista = serviceCadastroUsuario.listaEmpresas();
-            return Response.status(Response.Status.FOUND)
+            return Response.status(Response.Status.OK)
                     .entity(lista).build();
 
         } catch (SQLException e) {
