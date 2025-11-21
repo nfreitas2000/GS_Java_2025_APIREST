@@ -43,7 +43,7 @@ public class ResourceDesafio {
     public Response readDesafiosEmpresa(@PathParam("id")int id){
         try{
             List<ModelDesafio> lista = serviceDesafios.desafiosEmpresa(id);
-            return Response.status(Response.Status.FOUND)
+            return Response.status(Response.Status.OK)
                     .entity(lista).build();
 
         } catch (SQLException e) {
@@ -77,7 +77,7 @@ public class ResourceDesafio {
     public Response deletarDesafios(@PathParam("id") int id){
         try{
             serviceDesafios.deletarDesafio(id);
-            return Response.status(Response.Status.FOUND)
+            return Response.status(Response.Status.OK)
                     .entity("Deletado com sucesso!").build();
 
         } catch (SQLException e) {

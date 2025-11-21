@@ -6,8 +6,6 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.acme.Model.DTO.Empresa.DTOEmpresaLogin;
 import org.acme.Model.DTO.Usuario.DTOUsuarioLogin;
-import org.acme.Repository.Login.RepositoryLoginEmpresa;
-import org.acme.Repository.Login.RepositoryLoginUsuario;
 import org.acme.Service.Login.ServiceLoginEmpresa;
 import org.acme.Service.Login.ServiceLoginUsuario;
 
@@ -26,7 +24,7 @@ public class ResourceLogin {
     public Response realizarLoginUsuario(DTOUsuarioLogin dadosUsuario){
         try{
             int id = serviceLoginUsuario.realizarLogin(dadosUsuario);
-            return Response.status(Response.Status.FOUND)
+            return Response.status(Response.Status.OK)
                     .entity(id).build();
 
         } catch (SQLException e) {
@@ -43,7 +41,7 @@ public class ResourceLogin {
     public Response realizarLoginEmpresa(DTOEmpresaLogin dadosEmpresa){
         try{
             int id = serviceLoginEmpresa.realizarLogin(dadosEmpresa);
-            return Response.status(Response.Status.FOUND)
+            return Response.status(Response.Status.OK)
                     .entity(id).build();
 
         } catch (SQLException e) {
