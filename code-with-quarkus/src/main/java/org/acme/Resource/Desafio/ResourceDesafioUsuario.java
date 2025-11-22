@@ -5,6 +5,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 import org.acme.Model.ModelDesafio;
 import org.acme.Model.ModelDesafioAceito;
+import org.acme.Model.ModelStatus;
 import org.acme.Service.Desafio.ServiceDesafioUsuario;
 
 import java.sql.SQLException;
@@ -81,6 +82,21 @@ public class ResourceDesafioUsuario {
                     .entity(e.getMessage()).build();
         }
     }
+
+    @Path("/stats/{id}")
+    @GET
+    public Response stats(@PathParam("id") int id){
+        try{
+            ModelStatus stats = serviceDesafioUsuario.retornaStats(id);
+            return Response.status(Response.Status.OK)
+                    .entity(stats).build();
+
+        } catch (SQLException e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Erro com a base de dados" + e).build();
+        }
+    }
+
 
 
 }

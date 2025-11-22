@@ -5,6 +5,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.NotFoundException;
 import org.acme.Model.ModelDesafio;
 import org.acme.Model.ModelDesafioAceito;
+import org.acme.Model.ModelStatus;
 import org.acme.Repository.Desafios.RepositoryDesafiosUsuario;
 
 import java.sql.SQLException;
@@ -43,5 +44,13 @@ public class ServiceDesafioUsuario {
             throw new NotFoundException("Nenhum desafio aceito!");
         }
         return lista;
+    }
+
+    public ModelStatus retornaStats (int id) throws SQLException {
+        ModelStatus stats = repositoryDesafiosUsuario.recuperarStatus(id);
+        if (stats == null){
+            throw new SQLException("Usuário não encontrado");
+        }
+        return stats;
     }
 }

@@ -5,6 +5,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.NotFoundException;
 import org.acme.Model.ModelDesafio;
 import org.acme.Model.ModelDesafioAceito;
+import org.acme.Model.ModelStatus;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -170,6 +171,24 @@ public class RepositoryDesafiosUsuario {
             }
         }
         return lista;
+    }
+
+    public ModelStatus recuperarStatus(int id_usuario) throws SQLException {
+        String sql = "SELECT * FROM T_LU_STATUS_USUARIO WHERE id_usuario = ?";
+
+        ModelStatus stats = null;
+        try (Connection con = dataSource.getConnection();
+                                      PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, id_usuario);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    stats = new ModelStatus(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6));
+                }
+            }
+        }
+        return stats;
     }
 
 
