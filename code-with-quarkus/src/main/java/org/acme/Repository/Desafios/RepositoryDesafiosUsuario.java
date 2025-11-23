@@ -74,6 +74,8 @@ public class RepositoryDesafiosUsuario {
 
         String sqlUpLevel = "UPDATE T_LU_STATUS_USUARIO SET nivel_atual = ?, xp_atual = ?, desafios_concluidos = ? WHERE id_usuario = ?";
 
+        String sqlNoUpLevel = "UPDATE T_LU_STATUS_USUARIO SET desafios_concluidos = desafios_concluidos + 1 WHERE id_usuario = ?";
+
         try (Connection con = dataSource.getConnection()) {
 
             con.setAutoCommit(false);
@@ -131,12 +133,13 @@ public class RepositoryDesafiosUsuario {
                     ps.setInt(4, idUsuario);
                     ps.executeUpdate();
                 }
+            } else {
+                try (PreparedStatement ps = con.prepareStatement(sqlNoUpLevel)) {
+                    ps.setInt(1, idUsuario);
+                }
             }
-
             con.commit();
         }
-
-
     }
 
     public List<ModelDesafioAceito> listarDesafiosAceitos(int idUsuario) throws SQLException {
