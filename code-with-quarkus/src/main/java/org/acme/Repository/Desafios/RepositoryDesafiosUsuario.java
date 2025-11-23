@@ -136,6 +136,7 @@ public class RepositoryDesafiosUsuario {
             } else {
                 try (PreparedStatement ps = con.prepareStatement(sqlNoUpLevel)) {
                     ps.setInt(1, idUsuario);
+                    ps.executeUpdate();
                 }
             }
             con.commit();
