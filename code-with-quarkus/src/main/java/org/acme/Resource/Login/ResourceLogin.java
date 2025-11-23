@@ -36,7 +36,7 @@ public class ResourceLogin {
         }
     }
 
-    @POST
+    @GET
     @Path("/empresa")
     public Response realizarLoginEmpresa(DTOEmpresaLogin dadosEmpresa){
         try{

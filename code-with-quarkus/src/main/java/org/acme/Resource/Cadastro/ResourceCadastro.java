@@ -28,11 +28,11 @@ public class ResourceCadastro {
     public Response cadastrarEmpresa(DTOEmpresa empresa){
         try{
             serviceCadastroEmpresa.inserir(empresa);
-            return Response.status(Response.Status.CREATED) /*201*/
+            return Response.status(Response.Status.CREATED)
                     .entity("Criado com Sucesso").build();
 
         } catch (SQLException e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR) /*500*/
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                     .entity("Erro com a base de dados" + e).build();
         }
         catch (IllegalArgumentException e) {
@@ -49,7 +49,7 @@ public class ResourceCadastro {
                     .entity(lista).build();
 
         } catch (SQLException e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR) /*500*/
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                     .entity("Erro com a base de dados" + e).build();
         }
         catch (IndexOutOfBoundsException e) {
@@ -66,7 +66,7 @@ public class ResourceCadastro {
                     .entity("Criado com Sucesso").build();
 
         } catch (SQLException e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR) /*500*/
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                     .entity("Erro com a base de dados" + e).build();
         }
         catch (IllegalArgumentException e) {
